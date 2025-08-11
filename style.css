@@ -81,3 +81,10 @@ footer {
     left: 0;
     font-size: 0.95rem;
     letter-
+    body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: url('sidh.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: #222;
+    line-height: 1.6;
+}
