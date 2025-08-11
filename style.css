@@ -7,13 +7,13 @@ body, h1, h2, h3, p, ul, li, a {
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f4f6f8;
-    color: #222;
+    background: #c2e707;
+    color: #1556ec;
     line-height: 1.6;
 }
 
 header {
-    background: #0078d7;
+    background: #1a93f6;
     color: #fff;
     padding: 24px 0;
     text-align: center;
