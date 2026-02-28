@@ -3,46 +3,413 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MP Sidha Medicines</title>
+    <title>Praveena Group | Architects of Modern Living</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <h1>MP Sidha Medicines</h1>
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">Products</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
+    <header class="top-bar">
+        <div class="top-bar-inner">
+            <div class="brand">
+                <span class="brand-mark">PG</span>
+                <div class="brand-text">
+                    <span class="brand-title">Praveena Group</span>
+                    <span class="brand-tagline">Architects of modern living.</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="#home"><span class="nav-index">01</span> Home</a>
+                <a href="#about"><span class="nav-index">02</span> About Us</a>
+                <a href="#projects"><span class="nav-index">03</span> Projects</a>
+                <a href="#nri"><span class="nav-index">04</span> NRI Corner</a>
+                <a href="#news"><span class="nav-index">05</span> News & Media</a>
+                <a href="#contact"><span class="nav-index">06</span> Contact</a>
             </nav>
+            <a href="#contact" class="nav-cta">Enquire Now</a>
         </div>
     </header>
-    <main>
+
+    <main id="home">
+        <!-- Hero -->
         <section class="hero">
             <div class="hero-text">
-                <h2>Welcome to MP Sidha Medicines</h2>
+                <div class="hero-kicker">Premium homes in growing cities</div>
+                <h1>
+                    Architects of the future,<br>
+                    <span>crafting homes that feel like you.</span>
+                </h1>
                 <p>
-                    Discover the power of traditional Sidha medicine for your health and wellness. We offer authentic remedies made from 100% natural ingredients, trusted by experts and delivered fast to your doorstep.
+                    Praveena Group designs and delivers thoughtfully planned residential communities,
+                    combining modern architecture, reliable construction, and people‑first amenities.
                 </p>
-                <a href="#" class="btn">Shop Now</a>
+                <div class="hero-actions">
+                    <a href="#projects" class="btn primary">View Projects</a>
+                    <a href="#contact" class="btn ghost">Book a Site Visit</a>
+                </div>
+                <div class="hero-meta">
+                    <div><strong>15+ projects</strong><span>Delivered & ongoing</span></div>
+                    <div><strong>2K+ families</strong><span>Who call us home</span></div>
+                    <div><strong>Multiple cities</strong><span>Strategic urban locations</span></div>
+                </div>
             </div>
             <div class="hero-image">
-                <img src="sidh.jpeg" alt="Sidha Medicines">
+                <img src="hero-buildings.jpg" alt="Modern residential towers by Praveena Group">
             </div>
         </section>
-        <section class="features">
-            <h3>Why Choose Us?</h3>
-            <ul>
-                <li>🌿 100% Natural Ingredients</li>
-                <li>👨‍⚕️ Trusted by Experts</li>
-                <li>🚚 Fast & Safe Delivery</li>
-                <li>💬 Friendly Customer Support</li>
-            </ul>
+
+        <!-- About -->
+        <section id="about" class="section">
+            <div class="section-header">
+                <span class="section-kicker">02 · About us</span>
+                <h2>More than buildings, we create communities.</h2>
+            </div>
+            <div class="section-grid two">
+                <div>
+                    <p class="lead">
+                        We believe a home is more than four walls. It is where families grow,
+                        memories are made, and futures are built with confidence.
+                    </p>
+                    <p>
+                        From land identification and master planning to architecture, engineering,
+                        and handover, Praveena Group follows a detail‑driven approach. We work with
+                        leading consultants, follow stringent quality checks, and stay committed to
+                        transparent processes at every step.
+                    </p>
+                </div>
+                <div class="pill-list">
+                    <div class="pill-card">
+                        <h3>Design‑first approach</h3>
+                        <p>Smart layouts, ample light, and efficient common areas in every project.</p>
+                    </div>
+                    <div class="pill-card">
+                        <h3>On‑time delivery</h3>
+                        <p>Clear construction milestones and regular updates to homebuyers.</p>
+                    </div>
+                    <div class="pill-card">
+                        <h3>Customer‑centric service</h3>
+                        <p>Dedicated teams for sales, documentation, possession, and post‑handover support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects -->
+        <section id="projects" class="section soft">
+            <div class="section-header">
+                <span class="section-kicker">03 · Featured projects</span>
+                <h2>Curated homes across key urban neighbourhoods.</h2>
+            </div>
+            <div class="cards-grid">
+                <article class="card">
+                    <h3>Praveena Heights · City 1</h3>
+                    <p>High‑rise gated community with landscaped podium, clubhouse, and sky‑view decks.</p>
+                    <ul>
+                        <li>2 & 3 BHK lifestyle apartments</li>
+                        <li>Near schools, IT parks, and metro</li>
+                    </ul>
+                </article>
+                <article class="card">
+                    <h3>Praveena Serena · City 2</h3>
+                    <p>Mid‑rise homes overlooking green courtyards with everyday retail at your doorstep.</p>
+                    <ul>
+                        <li>Efficiently planned 1.5, 2 & 3 BHKs</li>
+                        <li>Central clubhouse with indoor games</li>
+                    </ul>
+                </article>
+                <article class="card">
+                    <h3>Praveena Sky · City 3</h3>
+                    <p>Iconic tower living with elevated amenities deck and city skyline views.</p>
+                    <ul>
+                        <li>Premium 3 & 4 BHK residences</li>
+                        <li>Infinity pool, gym, and viewing deck</li>
+                    </ul>
+                </article>
+                <article class="card">
+                    <h3>Upcoming Launches</h3>
+                    <p>New phases and projects in fast‑growing residential corridors.</p>
+                    <ul>
+                        <li>Register to receive early‑bird information</li>
+                        <li>Special pre‑launch benefits for limited buyers</li>
+                    </ul>
+                </article>
+            </div>
+            <p class="section-note">
+                Looking for a specific location or configuration? Share your preferences in the enquiry
+                form and our team will suggest suitable projects.
+            </p>
+        </section>
+
+        <!-- NRI Corner -->
+        <section id="nri" class="section">
+            <div class="section-header">
+                <span class="section-kicker">04 · NRI Corner</span>
+                <h2>End‑to‑end assistance for NRI homebuyers.</h2>
+            </div>
+            <div class="section-grid two">
+                <div>
+                    <p class="lead">
+                        Whether you are investing from overseas or planning a future move back home,
+                        our dedicated NRI team supports you across time zones.
+                    </p>
+                    <p>
+                        From virtual walkthroughs and documentation to bank tie‑ups and possession
+                        coordination, we simplify every step so you can buy with confidence from
+                        wherever you are.
+                    </p>
+                </div>
+                <div class="pill-list">
+                    <div class="pill-card">
+                        <h3>Virtual project tours</h3>
+                        <p>Detailed video tours, floor plan explainers, and live Q&A sessions.</p>
+                    </div>
+                    <div class="pill-card">
+                        <h3>Documentation support</h3>
+                        <p>Guidance on KYC, POA, loan processing, and registration formalities.</p>
+                    </div>
+                    <div class="pill-card">
+                        <h3>After‑sales coordination</h3>
+                        <p>Possession, key handover, and rental/maintenance guidance on request.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News & Media -->
+        <section id="news" class="section soft">
+            <div class="section-header">
+                <span class="section-kicker">05 · News & media</span>
+                <h2>Recognised by leading publications and industry bodies.</h2>
+            </div>
+            <div class="cards-grid blog-grid">
+                <article class="card">
+                    <h3>Investment Feature · 6 Dec 2025</h3>
+                    <p>Coverage on Praveena Group’s latest community and its connectivity advantages.</p>
+                    <span class="meta">Business Daily · Print & digital</span>
+                </article>
+                <article class="card">
+                    <h3>City Edition · 14 Nov 2025</h3>
+                    <p>Story on how thoughtful design is reshaping mid‑income housing in the region.</p>
+                    <span class="meta">Leading newspaper · City focus</span>
+                </article>
+                <article class="card">
+                    <h3>Awards & recognitions</h3>
+                    <p>Multiple industry awards for project innovation, customer trust, and green design.</p>
+                    <span class="meta">View full list in Awards section</span>
+                </article>
+            </div>
+        </section>
+
+        <!-- Blog / Insights -->
+        <section id="blog" class="section">
+            <div class="section-header">
+                <span class="section-kicker">06 · Blog</span>
+                <h2>Ideas, tips, and trends in modern living.</h2>
+            </div>
+            <div class="cards-grid blog-grid">
+                <article class="card">
+                    <h3>Quick tips to refresh your bedroom</h3>
+                    <p>Simple design changes that can instantly make your private space feel bigger and brighter.</p>
+                    <span class="meta">Home styling · 3 min read</span>
+                </article>
+                <article class="card">
+                    <h3>Latest interior design trends</h3>
+                    <p>From earthy palettes to smart storage, see what’s shaping new‑age Indian homes.</p>
+                    <span class="meta">Interiors · 4 min read</span>
+                </article>
+                <article class="card">
+                    <h3>Checklist before you book a home</h3>
+                    <p>Key things to review around location, approvals, and amenities before making a decision.</p>
+                    <span class="meta">Buyer guide · 5 min read</span>
+                </article>
+            </div>
+        </section>
+
+        <!-- Awards & Accolades -->
+        <section id="awards" class="section soft">
+            <div class="section-header">
+                <span class="section-kicker">07 · Awards & accolades</span>
+                <h2>Trust recognised by the industry.</h2>
+            </div>
+            <div class="cards-grid">
+                <article class="card">
+                    <h3>Commercial Excellence Award</h3>
+                    <p>Special recognition for a landmark commercial development in a prime business district.</p>
+                </article>
+                <article class="card">
+                    <h3>Most Trusted Real Estate Brand</h3>
+                    <p>Awarded in the regional category for customer satisfaction and delivery track record.</p>
+                </article>
+                <article class="card">
+                    <h3>Innovative Project of the Year</h3>
+                    <p>Honoured for integrating green spaces, community zones, and smart amenities.</p>
+                </article>
+                <article class="card">
+                    <h3>Green Champion Recognition</h3>
+                    <p>Appreciation for adopting sustainable construction practices and energy‑efficient design.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Customer Connect -->
+        <section id="connect" class="section">
+            <div class="section-header">
+                <span class="section-kicker">08 · Customer connect</span>
+                <h2>Supporting you from first visit to handover and beyond.</h2>
+            </div>
+            <div class="section-grid two">
+                <div>
+                    <p class="lead">
+                        Our dedicated customer connect team is here to assist with referrals, channel
+                        partnerships, documentation, and financial queries.
+                    </p>
+                    <ul class="check-list">
+                        <li>Referral benefits for existing homeowners</li>
+                        <li>Channel partner and broker engagement</li>
+                        <li>Guidance on home loan options and approvals</li>
+                    </ul>
+                </div>
+                <div class="pill-list">
+                    <div class="pill-card">
+                        <h3>Referral program</h3>
+                        <p>Introduce friends or family and unlock special benefits on successful bookings.</p>
+                    </div>
+                    <div class="pill-card">
+                        <h3>Partner with us</h3>
+                        <p>Collaborate as a sales/channel partner on select launches and inventory.</p>
+                    </div>
+                    <div class="pill-card">
+                        <h3>Home finance help</h3>
+                        <p>Co‑ordinated support with leading banks and housing finance institutions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Careers -->
+        <section id="careers" class="section soft">
+            <div class="section-header">
+                <span class="section-kicker">09 · Careers</span>
+                <h2>Build your career while we build the city.</h2>
+            </div>
+            <div class="section-grid two">
+                <div>
+                    <p class="lead">
+                        From architecture and engineering to sales, marketing, and customer success,
+                        we are always looking for people passionate about real estate.
+                    </p>
+                    <p>
+                        Write to us with your profile and area of interest. Our HR team will connect
+                        when a suitable opportunity opens up.
+                    </p>
+                </div>
+                <div class="pill-list">
+                    <div class="pill-card">
+                        <h3>Project management</h3>
+                        <p>Coordinate site teams, vendors, and timelines to deliver projects on schedule.</p>
+                    </div>
+                    <div class="pill-card">
+                        <h3>Sales & marketing</h3>
+                        <p>Help homebuyers discover the right project and support them through the journey.</p>
+                    </div>
+                    <div class="pill-card">
+                        <h3>Customer experience</h3>
+                        <p>Work closely with residents to ensure a smooth handover and community setup.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / Enquiry -->
+        <section id="contact" class="section">
+            <div class="section-header">
+                <span class="section-kicker">10 · Contact us</span>
+                <h2>Enquire now and discover your next home.</h2>
+            </div>
+            <div class="section-grid two">
+                <div>
+                    <p class="lead">
+                        Share a few details and our sales team will connect with you to understand your
+                        requirements, suggest projects, and schedule a site visit.
+                    </p>
+                    <ul class="contact-points">
+                        <li><strong>Phone</strong> <span>+91‑XXXXXXXXXX</span></li>
+                        <li><strong>WhatsApp</strong> <span>+91‑XXXXXXXXXX</span></li>
+                        <li><strong>Email</strong> <span>sales@praveenagroup.com</span></li>
+                    </ul>
+                </div>
+                <form class="contact-form">
+                    <div class="form-row">
+                        <input type="text" name="name" placeholder="Full name" required>
+                    </div>
+                    <div class="form-row two">
+                        <input type="tel" name="phone" placeholder="Phone number" required>
+                        <input type="email" name="email" placeholder="Email (optional)">
+                    </div>
+                    <div class="form-row two">
+                        <select name="city" required>
+                            <option value="">Preferred city</option>
+                            <option value="city1">City 1</option>
+                            <option value="city2">City 2</option>
+                            <option value="city3">City 3</option>
+                        </select>
+                        <select name="bhk">
+                            <option value="">BHK preference</option>
+                            <option value="1rk">1 RK</option>
+                            <option value="1bhk">1 BHK</option>
+                            <option value="1_5bhk">1.5 BHK</option>
+                            <option value="2bhk">2 BHK</option>
+                            <option value="2_5bhk">2.5 BHK</option>
+                            <option value="3bhk">3 BHK</option>
+                            <option value="3_5bhk">3.5 BHK</option>
+                            <option value="4bhk">4 BHK</option>
+                            <option value="4_5bhk">4.5 BHK</option>
+                            <option value="5bhk">5 BHK</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <textarea name="message" rows="3" placeholder="Tell us what you are looking for: budget, project, location..."></textarea>
+                    </div>
+                    <button type="button" class="btn primary full-width" id="enquireBtn">
+                        Submit enquiry
+                    </button>
+                    <p class="form-note">By submitting, you authorize Praveena Group to contact you via call, SMS, email, or WhatsApp.</p>
+                </form>
+            </div>
         </section>
     </main>
-    <footer>
-        &copy; 2025 MP Sidha Medicines. All rights reserved.
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand">Praveena Group</div>
+                <p>Premium homes crafted with care, transparency, and long‑term value.</p>
+            </div>
+            <div class="footer-links">
+                <div>
+                    <h4>Company</h4>
+                    <a href="#about">About us</a>
+                    <a href="#careers">Careers</a>
+                    <a href="#awards">Awards</a>
+                </div>
+                <div>
+                    <h4>Explore</h4>
+                    <a href="#projects">Projects</a>
+                    <a href="#nri">NRI Corner</a>
+                    <a href="#connect">Customer connect</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Praveena Group. All rights reserved.</span>
+        </div>
     </footer>
+
+    <script>
+        const enquireBtn = document.getElementById('enquireBtn');
+        if (enquireBtn) {
+            enquireBtn.addEventListener('click', function () {
+                alert('Thank you for your interest! Our team will contact you shortly.');
+            });
+        }
+    </script>
 </body>
 </html>
