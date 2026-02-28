@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="flex items-start justify-between gap-3">
+    <div>
+      <h1 class="text-xl font-semibold">Users</h1>
+      <p class="text-sm text-slate-600 mt-1">Role-based access (Admin / Staff / Demo).</p>
+    </div>
+    <a class="text-sm text-blue-700 hover:underline" href="/dashboard">← Back</a>
+  </div>
+
+  <div class="mt-5 rounded-xl border border-slate-200 p-4">
+    <div class="font-medium">Create user</div>
+    <form class="mt-3 grid grid-cols-1 md:grid-cols-4 gap-3" method="post" action="/admin/users/new">
+      <input name="username" placeholder="username" class="rounded border border-slate-300 px-3 py-2" required />
+      <input name="password" placeholder="password" class="rounded border border-slate-300 px-3 py-2" required />
+      <select name="role" class="rounded border border-slate-300 px-3 py-2">
+        <option value="staff">staff</option>
+        <option value="demo">demo (read-only)</option>
+        <option value="admin">admin</option>
+      </select>
+      <button class="rounded bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-700">Create</button>
+    </form>
+  </div>
+
+  <div class="mt-5 overflow-x-auto">
+    <table class="min-w-full text-sm">
+      <thead>
+        <tr class="text-left text-slate-500 border-b">
+          <th class="py-2 pr-4">Username</th>
+          <th class="py-2 pr-4">Role</th>
+          <th class="py-2 pr-4">Active</th>
+          <th class="py-2 pr-4">Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+        <tr class="border-b last:border-b-0">
+          <td class="py-2 pr-4 font-mono">{{ u.username }}</td>
+          <td class="py-2 pr-4">{{ u.role }}</td>
+          <td class="py-2 pr-4">{{ "Yes" if u.is_active else "No" }}</td>
+          <td class="py-2 pr-4 text-slate-500">{{ u.created_at.strftime("%Y-%m-%d") }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+

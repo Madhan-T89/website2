@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <h1 class="text-xl font-semibold">Inventory</h1>
+      <p class="text-sm text-slate-600 mt-1">HSN/GST product catalog with stock tracking and low-stock alerts.</p>
+    </div>
+    <a class="rounded-lg bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-700" href="/inventory/products/new">
+      + New product
+    </a>
+  </div>
+
+  <div class="mt-4"
+       hx-get="/inventory/metrics"
+       hx-trigger="load, every 10s"
+       hx-swap="innerHTML">
+    <div class="text-sm text-slate-500">Loading metrics…</div>
+  </div>
+
+  <form class="mt-4 flex gap-2" method="get" action="/inventory">
+    <input name="q" value="{{ q }}" placeholder="Search product name / HSN..." class="w-full rounded-lg border border-slate-300 px-3 py-2" />
+    <button class="rounded-lg border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50">Search</button>
+  </form>
+
+  <div class="mt-4 overflow-x-auto">
+    <table class="min-w-full text-sm">
+      <thead>
+        <tr class="text-left text-slate-500 border-b">
+          <th class="py-2 pr-4">Product</th>
+          <th class="py-2 pr-4">HSN</th>
+          <th class="py-2 pr-4">GST %</th>
+          <th class="py-2 pr-4">Unit</th>
+          <th class="py-2 pr-4">Qty</th>
+          <th class="py-2 pr-4">Reorder</th>
+          <th class="py-2 pr-4">Status</th>
+          <th class="py-2 pr-4">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product, qty in rows %}
+        {% set is_low = (qty|int) <= (product.reorder_level|int) %}
+        <tr class="border-b last:border-b-0 {% if is_low %}bg-amber-50{% endif %}">
+          <td class="py-2 pr-4 font-medium">{{ product.name }}</td>
+          <td class="py-2 pr-4 font-mono">{{ product.hsn_code or "-" }}</td>
+          <td class="py-2 pr-4">{{ "%.2f"|format(product.gst_rate) }}</td>
+          <td class="py-2 pr-4">{{ product.unit }}</td>
+          <td class="py-2 pr-4 font-semibold">{{ qty|int }}</td>
+          <td class="py-2 pr-4">{{ product.reorder_level }}</td>
+          <td class="py-2 pr-4">
+            {% if is_low %}
+              <span class="inline-flex items-center rounded-full bg-amber-100 text-amber-900 px-2 py-0.5 text-xs font-medium">Low</span>
+            {% else %}
+              <span class="inline-flex items-center rounded-full bg-emerald-100 text-emerald-900 px-2 py-0.5 text-xs font-medium">OK</span>
+            {% endif %}
+          </td>
+          <td class="py-2 pr-4">
+            <a class="text-blue-700 hover:underline" href="/inventory/products/{{ product.id }}">Open</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td class="py-4 text-slate-500" colspan="8">No products yet. Add one to start tracking stock.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+

@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+SQLAlchemy
+python-multipart
+Jinja2
+python-jose[cryptography]
+bcrypt
+pydantic-settings
+reportlab
+python-docx

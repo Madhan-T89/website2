@@ -1,0 +1,12 @@
+<div class="flex flex-wrap items-center gap-3">
+  <div class="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm">
+    <span class="text-slate-500">Products:</span>
+    <span class="font-semibold">{{ total_products }}</span>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm">
+    <span class="text-slate-500">Low stock:</span>
+    <span class="font-semibold">{{ low_stock }}</span>
+  </div>
+  <div class="text-xs text-slate-400">Updated {{ now.strftime("%H:%M:%S") }}</div>
+</div>
+

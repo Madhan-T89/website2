@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title or "Clinic Management" }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  </head>
+  <body class="min-h-screen text-slate-900 bg-cover bg-fixed bg-center" style="background-image: url('/sidh.jpeg')">
+    <div class="fixed inset-0 bg-slate-950/40"></div>
+    <div class="relative">
+    <div class="bg-blue-600 text-white">
+      <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+        <div class="font-semibold tracking-wide">{{ brand or "MP Sidha Medicines" }}</div>
+        {% if user %}
+        <form method="post" action="/logout">
+          <button class="rounded bg-white/10 px-3 py-1 text-sm hover:bg-white/20">
+            Logout ({{ user.username }})
+          </button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="mx-auto max-w-6xl px-4 py-6 grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6">
+      {% if user %}
+      <aside class="rounded-xl bg-white/95 backdrop-blur border border-slate-200 p-4">
+        <nav class="space-y-1 text-sm">
+          <a class="block rounded px-3 py-2 hover:bg-slate-50" href="/dashboard">Dashboard</a>
+          <a class="block rounded px-3 py-2 hover:bg-slate-50" href="/patients">Patients</a>
+          <a class="block rounded px-3 py-2 hover:bg-slate-50" href="/inventory">Inventory</a>
+          <a class="block rounded px-3 py-2 hover:bg-slate-50" href="/purchases">Purchases</a>
+          <a class="block rounded px-3 py-2 hover:bg-slate-50" href="/billing">Billing</a>
+          {% if user.role == "admin" %}
+          <div class="pt-2 mt-2 border-t border-slate-200 text-xs uppercase tracking-wide text-slate-400 px-3">Admin</div>
+          <a class="block rounded px-3 py-2 hover:bg-slate-50" href="/admin/users">Users</a>
+          <a class="block rounded px-3 py-2 hover:bg-slate-50" href="/admin/tenants">Tenants</a>
+          {% endif %}
+        </nav>
+        <div class="mt-4 text-xs text-slate-500">
+          Role: <span class="font-medium">{{ user.role }}</span>
+        </div>
+      </aside>
+      {% endif %}
+
+      <main class="rounded-xl bg-white/95 backdrop-blur border border-slate-200 p-5">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+    </div>
+  </body>
+</html>

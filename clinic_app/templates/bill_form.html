@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="flex items-start justify-between gap-3">
+    <div>
+      <h1 class="text-xl font-semibold">New bill</h1>
+      <p class="text-sm text-slate-600 mt-1">Itemized billing for consulting, treatments, and medicines.</p>
+    </div>
+    <a class="text-sm text-blue-700 hover:underline" href="/billing">← Back</a>
+  </div>
+
+  <form method="post" action="/billing/new" class="mt-5 space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <label class="text-sm font-medium">Patient *</label>
+        <select name="patient_id" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" required>
+          {% for p in patients %}
+          <option value="{{ p.id }}">{{ p.name }} ({{ p.patient_code }})</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <label class="text-sm font-medium">Bill date</label>
+        <input name="bill_date" type="date" value="{{ today.isoformat() }}" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" />
+      </div>
+      <div>
+        <label class="text-sm font-medium">Consulting fee</label>
+        <input name="consulting_fee" inputmode="decimal" value="0" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" />
+      </div>
+    </div>
+
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="font-medium">Clinic branding (shown on exports)</div>
+      <div class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="md:col-span-2">
+          <label class="text-sm font-medium">Clinic name *</label>
+          <input name="clinic_name" value="{{ clinic_name }}" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" required />
+        </div>
+        <div>
+          <label class="text-sm font-medium">Phone</label>
+          <input name="clinic_phone" value="{{ clinic_phone }}" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" />
+        </div>
+        <div class="md:col-span-3">
+          <label class="text-sm font-medium">Address</label>
+          <textarea name="clinic_address" rows="2" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2">{{ clinic_address }}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="flex items-center justify-between gap-2">
+        <div class="font-medium">Line items</div>
+        <button type="button" id="addLine" class="rounded-lg border border-slate-300 px-3 py-1 text-sm hover:bg-slate-50">+ Add line</button>
+      </div>
+
+      <div class="mt-3 overflow-x-auto">
+        <table class="min-w-full text-sm" id="linesTable">
+          <thead>
+            <tr class="text-left text-slate-500 border-b">
+              <th class="py-2 pr-3">Type</th>
+              <th class="py-2 pr-3">Description *</th>
+              <th class="py-2 pr-3">Product (medicine)</th>
+              <th class="py-2 pr-3">Qty</th>
+              <th class="py-2 pr-3">Unit price</th>
+              <th class="py-2 pr-3">GST %</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-2 pr-3">
+                <select name="line_type" class="rounded border border-slate-300 px-2 py-1">
+                  <option value="treatment">treatment</option>
+                  <option value="medicine">medicine</option>
+                </select>
+              </td>
+              <td class="py-2 pr-3"><input name="description" class="w-72 rounded border border-slate-300 px-2 py-1" required /></td>
+              <td class="py-2 pr-3">
+                <select name="product_id" class="w-56 rounded border border-slate-300 px-2 py-1">
+                  <option value="">-</option>
+                  {% for pr in products %}
+                  <option value="{{ pr.id }}">{{ pr.name }}</option>
+                  {% endfor %}
+                </select>
+              </td>
+              <td class="py-2 pr-3"><input name="qty" inputmode="decimal" value="1" class="w-20 rounded border border-slate-300 px-2 py-1" /></td>
+              <td class="py-2 pr-3"><input name="unit_price" inputmode="decimal" value="0" class="w-28 rounded border border-slate-300 px-2 py-1" /></td>
+              <td class="py-2 pr-3"><input name="gst_rate" inputmode="decimal" value="0" class="w-20 rounded border border-slate-300 px-2 py-1" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-2 text-xs text-slate-500">Medicines deduct stock automatically (FIFO by expiry date).</div>
+    </div>
+
+    <button class="rounded-lg bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-700">
+      Create bill
+    </button>
+  </form>
+
+  <script>
+    const addLineBtn = document.getElementById('addLine');
+    const tbody = document.querySelector('#linesTable tbody');
+    addLineBtn.addEventListener('click', () => {
+      const first = tbody.querySelector('tr');
+      const row = first.cloneNode(true);
+      row.querySelectorAll('input').forEach(i => { if (i.name !== 'qty') i.value = (i.name === 'unit_price' || i.name === 'gst_rate') ? '0' : ''; });
+      row.querySelectorAll('select').forEach(s => { s.selectedIndex = 0; });
+      tbody.appendChild(row);
+    });
+  </script>
+{% endblock %}
+

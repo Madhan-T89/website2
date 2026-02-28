@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <h1 class="text-xl font-semibold">Purchases</h1>
+      <p class="text-sm text-slate-600 mt-1">Record vendor purchases with invoice details; stock updates automatically.</p>
+    </div>
+    <a class="rounded-lg bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-700" href="/purchases/new">
+      + New purchase
+    </a>
+  </div>
+
+  <form class="mt-4 flex gap-2" method="get" action="/purchases">
+    <input name="q" value="{{ q }}" placeholder="Search invoice / vendor..." class="w-full rounded-lg border border-slate-300 px-3 py-2" />
+    <button class="rounded-lg border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50">Search</button>
+  </form>
+
+  <div class="mt-4 overflow-x-auto">
+    <table class="min-w-full text-sm">
+      <thead>
+        <tr class="text-left text-slate-500 border-b">
+          <th class="py-2 pr-4">Invoice</th>
+          <th class="py-2 pr-4">Vendor</th>
+          <th class="py-2 pr-4">Date</th>
+          <th class="py-2 pr-4">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in purchases %}
+        <tr class="border-b last:border-b-0">
+          <td class="py-2 pr-4 font-mono">{{ p.invoice_no }}</td>
+          <td class="py-2 pr-4">{{ p.vendor.name }}</td>
+          <td class="py-2 pr-4 text-slate-500">{{ p.invoice_date.isoformat() }}</td>
+          <td class="py-2 pr-4 font-semibold">₹{{ "{:,.2f}".format(p.total) }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td class="py-4 text-slate-500" colspan="4">No purchases yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+

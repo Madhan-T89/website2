@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <h1 class="text-xl font-semibold">Dashboard</h1>
+      <p class="text-sm text-slate-600 mt-1">Quick overview of patients, stock, billing, and purchases.</p>
+    </div>
+    <div class="text-xs text-slate-500">
+      Environment: <span class="font-medium">{{ app_env }}</span>
+    </div>
+  </div>
+
+  <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="text-xs text-slate-500">Total patients</div>
+      <div class="text-2xl font-semibold mt-1">{{ metrics.total_patients }}</div>
+    </div>
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="text-xs text-slate-500">Products</div>
+      <div class="text-2xl font-semibold mt-1">{{ metrics.total_products }}</div>
+    </div>
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="text-xs text-slate-500">Low stock items</div>
+      <div class="text-2xl font-semibold mt-1">{{ metrics.low_stock_products }}</div>
+    </div>
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="text-xs text-slate-500">Total stock (units)</div>
+      <div class="text-2xl font-semibold mt-1">{{ metrics.total_stock_qty }}</div>
+    </div>
+  </div>
+
+  <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="text-xs text-slate-500">Bills (last 30 days)</div>
+      <div class="text-2xl font-semibold mt-1">{{ metrics.bills_30d }}</div>
+    </div>
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="text-xs text-slate-500">Revenue (last 30 days)</div>
+      <div class="text-2xl font-semibold mt-1">₹{{ "{:,.2f}".format(metrics.revenue_30d) }}</div>
+    </div>
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="text-xs text-slate-500">Purchases (last 30 days)</div>
+      <div class="text-2xl font-semibold mt-1">{{ metrics.purchases_30d }}</div>
+    </div>
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="text-xs text-slate-500">Spend (last 30 days)</div>
+      <div class="text-2xl font-semibold mt-1">₹{{ "{:,.2f}".format(metrics.spend_30d) }}</div>
+    </div>
+  </div>
+
+  <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="font-medium">Next actions</div>
+      <div class="mt-2 text-sm text-slate-700 space-y-1">
+        <div>- Add a new patient, then record a visit.</div>
+        <div>- Create products with HSN/GST, then add purchases to update stock.</div>
+        <div>- Generate a bill and export PDF/DOCX.</div>
+      </div>
+    </div>
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="font-medium">Quick links</div>
+      <div class="mt-2 flex flex-wrap gap-2">
+        <a class="rounded bg-slate-100 hover:bg-slate-200 px-3 py-1 text-sm" href="/patients">Patients</a>
+        <a class="rounded bg-slate-100 hover:bg-slate-200 px-3 py-1 text-sm" href="/inventory">Inventory</a>
+        <a class="rounded bg-slate-100 hover:bg-slate-200 px-3 py-1 text-sm" href="/billing">Billing</a>
+        <a class="rounded bg-slate-100 hover:bg-slate-200 px-3 py-1 text-sm" href="/purchases">Purchases</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

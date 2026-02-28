@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <h1 class="text-xl font-semibold">Patients</h1>
+      <p class="text-sm text-slate-600 mt-1">Search patients and open profiles with visit history.</p>
+    </div>
+    <a class="rounded-lg bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-700" href="/patients/new">
+      + New patient
+    </a>
+  </div>
+
+  <form class="mt-4 flex gap-2" method="get" action="/patients">
+    <input name="q" value="{{ q }}" placeholder="Search name / phone / code..." class="w-full rounded-lg border border-slate-300 px-3 py-2" />
+    <button class="rounded-lg border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50">Search</button>
+  </form>
+
+  <div class="mt-4 overflow-x-auto">
+    <table class="min-w-full text-sm">
+      <thead>
+        <tr class="text-left text-slate-500 border-b">
+          <th class="py-2 pr-4">Code</th>
+          <th class="py-2 pr-4">Name</th>
+          <th class="py-2 pr-4">Phone</th>
+          <th class="py-2 pr-4">Created</th>
+          <th class="py-2 pr-4">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in patients %}
+        <tr class="border-b last:border-b-0">
+          <td class="py-2 pr-4 font-mono">{{ p.patient_code }}</td>
+          <td class="py-2 pr-4 font-medium">{{ p.name }}</td>
+          <td class="py-2 pr-4">{{ p.phone or "-" }}</td>
+          <td class="py-2 pr-4 text-slate-500">{{ p.created_at.strftime("%Y-%m-%d") }}</td>
+          <td class="py-2 pr-4">
+            <a class="text-blue-700 hover:underline" href="/patients/{{ p.id }}">Open</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td class="py-4 text-slate-500" colspan="5">No patients found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+

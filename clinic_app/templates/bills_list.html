@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <h1 class="text-xl font-semibold">Billing</h1>
+      <p class="text-sm text-slate-600 mt-1">Generate bills and export PDF/DOCX with your clinic branding.</p>
+    </div>
+    <a class="rounded-lg bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-700" href="/billing/new">
+      + New bill
+    </a>
+  </div>
+
+  <form class="mt-4 flex gap-2" method="get" action="/billing">
+    <input name="q" value="{{ q }}" placeholder="Search bill no / patient..." class="w-full rounded-lg border border-slate-300 px-3 py-2" />
+    <button class="rounded-lg border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50">Search</button>
+  </form>
+
+  <div class="mt-4 overflow-x-auto">
+    <table class="min-w-full text-sm">
+      <thead>
+        <tr class="text-left text-slate-500 border-b">
+          <th class="py-2 pr-4">Bill no</th>
+          <th class="py-2 pr-4">Patient</th>
+          <th class="py-2 pr-4">Date</th>
+          <th class="py-2 pr-4">Total</th>
+          <th class="py-2 pr-4">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for b in bills %}
+        <tr class="border-b last:border-b-0">
+          <td class="py-2 pr-4 font-mono">{{ b.bill_no }}</td>
+          <td class="py-2 pr-4">{{ b.patient.name }}</td>
+          <td class="py-2 pr-4 text-slate-500">{{ b.bill_date.isoformat() }}</td>
+          <td class="py-2 pr-4 font-semibold">₹{{ "{:,.2f}".format(b.total) }}</td>
+          <td class="py-2 pr-4">
+            <a class="text-blue-700 hover:underline" href="/billing/{{ b.id }}">Open</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td class="py-4 text-slate-500" colspan="5">No bills yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+

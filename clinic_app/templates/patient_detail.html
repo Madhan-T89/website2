@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="flex flex-wrap items-start justify-between gap-3">
+    <div>
+      <div class="text-xs text-slate-500">Patient code: <span class="font-mono">{{ patient.patient_code }}</span></div>
+      <h1 class="text-xl font-semibold mt-1">{{ patient.name }}</h1>
+      <div class="text-sm text-slate-600 mt-1">
+        {{ patient.phone or "No phone" }}
+        {% if patient.email %} · {{ patient.email }}{% endif %}
+      </div>
+    </div>
+    <div class="flex gap-2">
+      <a class="rounded-lg border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50" href="/patients">← Back</a>
+      <a class="rounded-lg bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-700" href="/patients/{{ patient.id }}/edit">
+        Edit
+      </a>
+    </div>
+  </div>
+
+  <div class="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-4">
+    <div class="lg:col-span-1 rounded-xl border border-slate-200 p-4">
+      <div class="font-medium">Profile</div>
+      <div class="mt-3 text-sm space-y-2">
+        <div><span class="text-slate-500">DOB:</span> {{ patient.dob.isoformat() if patient.dob else "-" }}</div>
+        <div><span class="text-slate-500">Gender:</span> {{ patient.gender or "-" }}</div>
+        <div><span class="text-slate-500">Address:</span><div class="mt-1 whitespace-pre-wrap">{{ patient.address or "-" }}</div></div>
+        <div><span class="text-slate-500">Notes:</span><div class="mt-1 whitespace-pre-wrap">{{ patient.notes or "-" }}</div></div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-2 space-y-4">
+      <div class="rounded-xl border border-slate-200 p-4">
+        <div class="font-medium">Add visit</div>
+        <form class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3" method="post" action="/patients/{{ patient.id }}/visits">
+          <div>
+            <label class="text-sm font-medium">Visit date</label>
+            <input type="date" name="visit_date" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="text-sm font-medium">Complaints</label>
+            <textarea name="complaints" rows="2" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
+          </div>
+          <div class="md:col-span-2">
+            <label class="text-sm font-medium">Diagnosis</label>
+            <textarea name="diagnosis" rows="2" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
+          </div>
+          <div class="md:col-span-2">
+            <label class="text-sm font-medium">Treatment</label>
+            <textarea name="treatment" rows="2" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
+          </div>
+          <div class="md:col-span-2">
+            <label class="text-sm font-medium">Medicines</label>
+            <textarea name="medicines" rows="2" placeholder="One per line (optional)" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
+          </div>
+          <div class="md:col-span-2">
+            <button class="rounded-lg bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-700">
+              Add visit
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 p-4">
+        <div class="flex items-center justify-between">
+          <div class="font-medium">Visit history</div>
+          <div class="text-xs text-slate-500">{{ visits|length }} visits</div>
+        </div>
+        <div class="mt-3 space-y-3">
+          {% for v in visits %}
+          <div class="rounded-lg border border-slate-200 p-3">
+            <div class="flex items-center justify-between gap-2">
+              <div class="text-sm font-medium">{{ v.visit_date.isoformat() }}</div>
+            </div>
+            <div class="mt-2 text-sm text-slate-700 space-y-2">
+              {% if v.complaints %}<div><span class="text-slate-500">Complaints:</span> <div class="whitespace-pre-wrap">{{ v.complaints }}</div></div>{% endif %}
+              {% if v.diagnosis %}<div><span class="text-slate-500">Diagnosis:</span> <div class="whitespace-pre-wrap">{{ v.diagnosis }}</div></div>{% endif %}
+              {% if v.treatment %}<div><span class="text-slate-500">Treatment:</span> <div class="whitespace-pre-wrap">{{ v.treatment }}</div></div>{% endif %}
+              {% if v.medicines %}<div><span class="text-slate-500">Medicines:</span> <div class="whitespace-pre-wrap">{{ v.medicines }}</div></div>{% endif %}
+            </div>
+          </div>
+          {% else %}
+          <div class="text-sm text-slate-500">No visits yet.</div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

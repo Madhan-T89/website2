@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="flex flex-wrap items-start justify-between gap-3">
+    <div>
+      <div class="text-xs text-slate-500">Bill no: <span class="font-mono">{{ bill.bill_no }}</span></div>
+      <h1 class="text-xl font-semibold mt-1">Bill for {{ bill.patient.name }}</h1>
+      <div class="text-sm text-slate-600 mt-1">Date: {{ bill.bill_date.isoformat() }}</div>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <a class="rounded-lg border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50" href="/billing">← Back</a>
+      <a class="rounded-lg border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50" href="/billing/{{ bill.id }}/export/pdf">Export PDF</a>
+      <a class="rounded-lg border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50" href="/billing/{{ bill.id }}/export/docx">Export DOCX</a>
+    </div>
+  </div>
+
+  <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="text-xs text-slate-500">Subtotal</div>
+      <div class="text-2xl font-semibold mt-1">₹{{ "{:,.2f}".format(bill.subtotal) }}</div>
+    </div>
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="text-xs text-slate-500">GST total</div>
+      <div class="text-2xl font-semibold mt-1">₹{{ "{:,.2f}".format(bill.gst_total) }}</div>
+    </div>
+    <div class="rounded-xl border border-slate-200 p-4">
+      <div class="text-xs text-slate-500">Total</div>
+      <div class="text-2xl font-semibold mt-1">₹{{ "{:,.2f}".format(bill.total) }}</div>
+    </div>
+  </div>
+
+  <div class="mt-6 rounded-xl border border-slate-200 p-4">
+    <div class="font-medium">Items</div>
+    <div class="mt-3 overflow-x-auto">
+      <table class="min-w-full text-sm">
+        <thead>
+          <tr class="text-left text-slate-500 border-b">
+            <th class="py-2 pr-4">Type</th>
+            <th class="py-2 pr-4">Description</th>
+            <th class="py-2 pr-4">Qty</th>
+            <th class="py-2 pr-4">Unit</th>
+            <th class="py-2 pr-4">GST%</th>
+            <th class="py-2 pr-4">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if bill.consulting_fee > 0 %}
+          <tr class="border-b">
+            <td class="py-2 pr-4">consulting</td>
+            <td class="py-2 pr-4">Consulting fee</td>
+            <td class="py-2 pr-4">1</td>
+            <td class="py-2 pr-4">-</td>
+            <td class="py-2 pr-4">0</td>
+            <td class="py-2 pr-4 font-semibold">₹{{ "{:,.2f}".format(bill.consulting_fee) }}</td>
+          </tr>
+          {% endif %}
+          {% for ln in lines %}
+          <tr class="border-b last:border-b-0">
+            <td class="py-2 pr-4">{{ ln.line_type }}</td>
+            <td class="py-2 pr-4">{{ ln.description }}</td>
+            <td class="py-2 pr-4">{{ "{:g}".format(ln.qty) }}</td>
+            <td class="py-2 pr-4">{{ "{:,.2f}".format(ln.unit_price) }}</td>
+            <td class="py-2 pr-4">{{ "{:g}".format(ln.gst_rate) }}</td>
+            <td class="py-2 pr-4 font-semibold">₹{{ "{:,.2f}".format(ln.line_total) }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td class="py-4 text-slate-500" colspan="6">No additional line items.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
+
